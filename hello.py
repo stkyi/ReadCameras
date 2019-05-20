@@ -3,7 +3,8 @@ sys.path.append(os.getcwd())
 strA = "python string"
 def pyFunc():
     print('python: pyFunc()')
-    return True
+    return 123
 class Dog():
-    def bark():
+    def bark(self):
         print('python:  Dog.bark')
+        return 111

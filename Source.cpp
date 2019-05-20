@@ -18,11 +18,14 @@ int main() {
 		/* можно так: s = extract<std::string>(main_module.attr("strA")); */
 
 		std::cout << "strA in C++ space: " << s << std::endl;
+		
+		object func = main_module.attr("pyFunc");
+		object rand2 = func();
+		std::cout << extract<int>(rand2) << std::endl;
 
-		dict d = extract<dict>(main_module.attr("__dict__"));
-		object fptr1 = d["pyFunc"];
-		//std::function<bool()> fptr2(fptr1);
-		std::cout << bool(fptr1()) << " " << std::endl;
+		object cl = main_module.attr("Dog")();
+		//cl.attr("bark")();
+		std::cout << extract<int>(cl.attr("bark")()) << std::endl;
 
 		std::cin.ignore(1000, '/n');
 	}
