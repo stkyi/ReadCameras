@@ -23,9 +23,12 @@ int main() {
 		object rand2 = func();
 		std::cout << extract<int>(rand2) << std::endl;
 
-		object cl = main_module.attr("Dog")();
-		//cl.attr("bark")();
-		std::cout << extract<int>(cl.attr("bark")()) << std::endl;
+		object cl_peter = main_module.attr("Dog")("Peter");
+		
+		//std::cout << extract<int>(cl.attr("bark")()) << std::endl;
+		object cl_jhon = main_module.attr("Dog")("jhon");
+		cl_peter.attr("bark")();
+		cl_jhon.attr("bark")();
 
 		std::cin.ignore(1000, '/n');
 	}
