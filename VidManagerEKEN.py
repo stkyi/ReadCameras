@@ -7,14 +7,15 @@ import threading
 from PyQt5.QtGui import (QPixmap, QImage)
 from PyQt5.QtCore import (QThread, Qt, pyqtSignal, pyqtSlot)
 from PyQt5 import QtCore, QtGui
-from PyQt5.QtWidgets import (QLabel, QWidget, QApplication, QPushButton)
+from PyQt5.QtWidgets import (QLabel, QWidget, QPushButton)
+from PyQt5.QtWidgets import QApplication
 
 import pyrealsense2 as rs
 import numpy as np
 import cv2
 import time
 
-
+app = None
 def hundred_format(number):
     if int(number) < 10:
         return "0{0}".format(number)
@@ -292,6 +293,8 @@ class App(QWidget):
         for t_e in App.th_eken:
             Eken.stop(t_e)
         os._exit(0)
+    def sh(self):
+        self.show()
 
 
 class add_button_close(QWidget):
@@ -314,19 +317,28 @@ class add_button_close(QWidget):
     @pyqtSlot()
     def on_click(self):
         App.stop()
+    def sh(self):
+        self.show()
+
+def create_app():
+    app = QApplication([])
+
+def run_app():
+    app.exec_()
 
 
 if __name__ == '__main__':
     print("starting the broadcast...")
     app = QApplication([])  # Новый экземпляр QApplication
-    window0 = App("Test", 1, "F", 850, 50)  # Создаём объект класса App
-    window1 = App("Test", 2, "L", 200, 50)
-    window2 = App("Test", 3, "R", 525, 50)
+    """window0 = App("Test", 0, "F", 850, 50)  # Создаём объект класса App
+    #window1 = App("Test", 2, "L", 200, 50)
+    #window2 = App("Test", 3, "R", 525, 50)
     button_close = add_button_close(850, 50)
 
     window0.show()  # Показываем окно
-    window1.show()  # Показываем окно
-    window2.show()
+    #window1.show()  # Показываем окно
+    #window2.show()
 
     button_close.show()
-    app.exec_()  # и запускаем приложение
+    #app.exec_()  # и запускаем приложение
+"""
